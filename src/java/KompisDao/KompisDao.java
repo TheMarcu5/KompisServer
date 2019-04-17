@@ -17,8 +17,8 @@ import javax.ws.rs.core.MediaType;
 
 public class KompisDao {
    //private static DaoInterface inter = new AllaKompisarDao();
-   //private static DaoInterface inter = new AllKompisarPers();
-   private static DaoInterface inter = new AllKompisarPersGson();
+   private static DaoInterface inter = new AllKompisarPers();
+   //private static DaoInterface inter = new AllKompisarPersGson();
    //private static AllaKompisarDao alla = new AllaKompisarDao();
    private static List<kompisar> kompislistan = inter.getAll();
    

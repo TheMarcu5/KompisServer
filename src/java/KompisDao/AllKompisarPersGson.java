@@ -6,11 +6,15 @@
 package KompisDao;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,14 +37,25 @@ public class AllKompisarPersGson implements Serializable,DaoInterface {
         polare.add(p3);
     }
     public List<kompisar> getAll(){
-        
-        return polare;
+        String json = new String();
+        //List<kompisar> fis = new ArrayList<kompisar>();
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\marcu\\Java\\Ny mapp (2)\\Helloworld!\\allaJson.json"));)
+        {
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<kompisar>>(){}.getType();
+            polare = new Gson().fromJson(br, listType);
+            
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+            return polare;
     }
     
     public void saveToFile(List<kompisar> i){
         Gson gson = new Gson();
         String json = gson.toJson(i);
-        try (FileWriter writer = new FileWriter("C:\\Users\\marcu\\Java\\Ny mapp (2)\\Helloworld!\\allaJson.json");){
+        try (FileWriter writer = new FileWriter("C:\\Users\\marcu\\Java\\Ny mapp (2)\\Helloworld!\\allaJson.json");)
+        {
             writer.write(json);
             
         } catch (IOException ex) {
